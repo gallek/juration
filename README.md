@@ -12,6 +12,11 @@ Fork changes
  - Added node.js package
  - Multilanguage support
 
+TODO
+-----
+
+ - Make juration a function (so that settings aren't shared among instances)
+
 Usage
 -----
 
