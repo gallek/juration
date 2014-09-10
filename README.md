@@ -5,9 +5,24 @@ A simple natural language duration parser written in javascript. Time ranges (in
 
 Inspired by [chronic](https://github.com/mojombo/chronic/), and [chronic_duration](https://github.com/hpoydar/chronic_duration).
 
+
+Fork changes
+-----
+
+ - Added node.js package
+ - Multilanguage support
+
 Usage
 -----
 
+Client-side:
+
+    <script src="juration.js"></script>
+
+Node.js:
+  
+    var juration = require('juration');
+    
 ### Parsing
 
     juration.parse("3mins 5secs"); // returns 185
@@ -19,6 +34,15 @@ Usage
     juration.stringify(185, { format: 'micro' }); // returns "3m 5s"
     juration.stringify(185, { format: 'long' });  // returns "3 minutes 5 seconds"
 
+### Changing language
+
+Client-side:
+    
+    <script src="../languages/it-IT.js"></script>
+    
+Node.js
+    juration.setLanguage('it-IT');
+    
 Examples
 --------
 Parse-able strings:

@@ -17,7 +17,8 @@
         'chrono': '',
         'micro':  's',
         'short':  'sec',
-        'long':   'second'
+        'long':   'second',
+        'plural': 'seconds'
       }
     },
     minutes: {
@@ -27,7 +28,8 @@
         'chrono': ':',
         'micro':  'm',
         'short':  'min',
-        'long':   'minute'
+        'long':   'minute',
+        'plural': 'minutes'
       }
     },
     hours: {
@@ -37,7 +39,8 @@
         'chrono': ':',
         'micro':  'h',
         'short':  'hr',
-        'long':   'hour'
+        'long':   'hour',
+        'plural': 'hours'
       }
     },
     days: {
@@ -47,7 +50,8 @@
         'chrono': ':',
         'micro':  'd',
         'short':  'day',
-        'long':   'day'
+        'long':   'day',
+        'plural': 'days'
       }
     },
     weeks: {
@@ -57,7 +61,8 @@
         'chrono': ':',
         'micro':  'w',
         'short':  'wk',
-        'long':   'week'
+        'long':   'week',
+        'plural': 'weeks'
       }
     },
     months: {
@@ -67,7 +72,8 @@
         'chrono': ':',
         'micro':  'm',
         'short':  'mth',
-        'long':   'month'
+        'long':   'month',
+        'plural': 'months'
       }
     },
     years: {
@@ -77,7 +83,8 @@
         'chrono': ':',
         'micro':  'y',
         'short':  'yr',
-        'long':   'year'
+        'long':   'year',
+        'plural': 'years'
       }
     }
   };
@@ -93,7 +100,7 @@
     }
     
     var defaults = {
-      format: 'short'
+      format: 'long'
     };
     
     var opts = _extend(defaults, options);
@@ -110,7 +117,11 @@
         values[i] += UNITS[units[i]].formats[opts.format];
       }
       else {
-        values[i] += ' ' + _pluralize(values[i], UNITS[units[i]].formats[opts.format]);
+        var singular = UNITS[units[i]].formats[opts.format],
+            plural = opts.format === 'long' ? 
+                      UNITS[units[i]].formats['plural'] :
+                      '';
+        values[i] += ' ' + _pluralize(values[i], singular, plural);
       }
     }
     var output = '';
@@ -170,8 +181,8 @@
       return s;
   };
   
-  var _pluralize = function(count, singular) {
-    return count == 1 ? singular : singular + "s";
+  var _pluralize = function(count, singular, plural) {
+    return count == 1 ? singular : plural || singular + "s";
   };
   
   var _isNumeric = function(n) {
@@ -187,7 +198,16 @@
     return obj;
   };
   
+  var setLanguage = function(language){
+    if (typeof require !== 'undefined'){
+      require('./languages/' + language);
+      return;
+    }
+  }
+  
   var juration = {
+    UNITS: UNITS,
+    setLanguage: setLanguage,
     parse: parse,
     stringify: stringify,
     humanize: stringify
