@@ -88,23 +88,23 @@
       }
     }
   };
-    
+
   var stringify = function(seconds, options) {
-    
+
     if(!_isNumeric(seconds)) {
       throw "juration.stringify(): Unable to stringify a non-numeric value";
     }
-    
+
     if((typeof options === 'object' && options.format !== undefined) && (options.format !== 'micro' && options.format !== 'short' && options.format !== 'long' && options.format !== 'chrono')) {
       throw "juration.stringify(): format cannot be '" + options.format + "', and must be either 'micro', 'short', or 'long'";
     }
-    
+
     var defaults = {
       format: 'long'
     };
-    
+
     var opts = _extend(defaults, options);
-    
+
     var units = ['years', 'months', 'days', 'hours', 'minutes', 'seconds'], values = [];
     for(var i = 0, len = units.length; i < len; i++) {
       if(i === 0) {
@@ -118,7 +118,7 @@
       }
       else {
         var singular = UNITS[units[i]].formats[opts.format],
-            plural = opts.format === 'long' ? 
+            plural = opts.format === 'long' ?
                       UNITS[units[i]].formats['plural'] :
                       '';
         values[i] += ' ' + _pluralize(values[i], singular, plural);
@@ -135,9 +135,9 @@
     }
     return output.replace(/\s+$/, '').replace(/^(00:)+/g, '').replace(/^0/, '');
   };
-  
+
   var parse = function(string) {
-    
+
     // returns calculated values separated by spaces
     for(var unit in UNITS) {
       for(var i = 0, mLen = UNITS[unit].patterns.length; i < mLen; i++) {
@@ -147,13 +147,13 @@
         });
       }
     }
-    
+
     var sum = 0,
         numbers = string
                     .replace(/(?!\.)\W+/g, ' ')                       // replaces non-word chars (excluding '.') with whitespace
                     .replace(/^\s+|\s+$|(?:and|plus|with)\s?/g, '')   // trim L/R whitespace, replace known join words with ''
                     .split(' ');
-    
+
     for(var j = 0, nLen = numbers.length; j < nLen; j++) {
       if(numbers[j] && isFinite(numbers[j])) {
          sum += parseFloat(numbers[j]);
@@ -166,29 +166,29 @@
     }
     return sum;
   };
-  
+
   // _padLeft('5', '0', 2); // 05
   var _padLeft = function(s, c, n) {
       if (! s || ! c || s.length >= n) {
         return s;
       }
-      
+
       var max = (n - s.length)/c.length;
       for (var i = 0; i < max; i++) {
         s = c + s;
       }
-      
+
       return s;
   };
-  
+
   var _pluralize = function(count, singular, plural) {
     return count == 1 ? singular : plural || singular + "s";
   };
-  
+
   var _isNumeric = function(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
   };
-  
+
   var _extend = function(obj, extObj) {
     for (var i in extObj) {
       if(extObj[i] !== undefined) {
@@ -197,17 +197,30 @@
     }
     return obj;
   };
-  
+
   var setLanguage = function(language){
     if (typeof require !== 'undefined'){
       require('./languages/' + language);
       return;
     }
-  }
-  
+  };
+
+  /**
+   * Override the length of a given unit. The primary use case for this is to adjust the duration used for
+   * 'months', such as to match the 30 days used by MomentJS.
+   * @param {string} unit - Unit value to override
+   * @param {number} seconds - Number of seconds to use for this unit
+   */
+  var setUnitValue = function(unit, seconds) {
+    if (UNITS[unit]) {
+      UNITS[unit].value = seconds;
+    }
+  };
+
   var juration = {
     UNITS: UNITS,
     setLanguage: setLanguage,
+    setUnitValue: setUnitValue,
     parse: parse,
     stringify: stringify,
     humanize: stringify
