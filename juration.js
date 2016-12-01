@@ -10,6 +10,17 @@
 (function() {
 
   var UNITS = {
+    milliseconds: {
+      patterns: ['millisecond', 'ms'],
+      value: 0.001,
+      formats: {
+        'chrono': '',
+        'micro':  'ms',
+        'short':  'ms',
+        'long':   'millisecond',
+        'plural': 'milliseconds'
+      }
+    },
     seconds: {
       patterns: ['second', 'sec', 's'],
       value: 1,
@@ -22,7 +33,7 @@
       }
     },
     minutes: {
-      patterns: ['minute', 'min', 'm(?!s)'],
+      patterns: ['minute', 'min', 'm'],
       value: 60,
       formats: {
         'chrono': ':',
@@ -105,7 +116,7 @@
 
     var opts = _extend(defaults, options);
 
-    var units = ['years', 'months', 'days', 'hours', 'minutes', 'seconds'], values = [];
+    var units = ['years', 'months', 'days', 'hours', 'minutes', 'seconds', 'milliseconds'], values = [];
     for(var i = 0, len = units.length; i < len; i++) {
       if(i === 0) {
         values[i] = Math.floor(seconds / UNITS[units[i]].value);
@@ -119,7 +130,7 @@
       else {
         var singular = UNITS[units[i]].formats[opts.format],
             plural = opts.format === 'long' ?
-                      UNITS[units[i]].formats['plural'] :
+                      UNITS[units[i]].formats.plural:
                       '';
         values[i] += ' ' + _pluralize(values[i], singular, plural);
       }
