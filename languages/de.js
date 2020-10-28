@@ -6,13 +6,13 @@
     juration = window.juration;
   
   if (juration && juration.UNITS){
-    juration.UNITS.seconds.patterns = ['Sekunde', 'sek', 's'];
-    juration.UNITS.minutes.patterns = ['Minute', 'min', 'm(?!s)'];
-    juration.UNITS.hours.patterns = ['Stunde', 'h'];
-    juration.UNITS.days.patterns = ['Tag', 'T', 't'];
-    juration.UNITS.weeks.patterns = ['Woche', 'w'];
-    juration.UNITS.months.patterns = ['Monat', 'M', 'Mo', 'Mnt'];
-    juration.UNITS.years.patterns = ['Jahr', 'J', 'Jr'];
+    juration.UNITS.seconds.patterns = ['Sekunde', 'Sekunden', 'sek', 's'];
+    juration.UNITS.minutes.patterns = ['Minute', 'Minuten', 'min', 'm(?!s)'];
+    juration.UNITS.hours.patterns = ['Stunde', 'Stunden', 'h'];
+    juration.UNITS.days.patterns = ['Tag', 'Tage', 'T', 't'];
+    juration.UNITS.weeks.patterns = ['Woche', 'Wochen', 'w'];
+    juration.UNITS.months.patterns = ['Monat', 'Monate', 'M', 'Mo', 'Mnt'];
+    juration.UNITS.years.patterns = ['Jahr', 'Jahre', 'J', 'Jr'];
     
     juration.UNITS.seconds.formats = {
       'chrono': '',
