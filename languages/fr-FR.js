@@ -8,12 +8,12 @@
 
   if (juration && juration.UNITS) {
     juration.UNITS.seconds.patterns = ['seconde', 'sec', 's'];
-    juration.UNITS.minutes.patterns = ['minute', 'min', 'm(?!s)'];
-    juration.UNITS.hours.patterns = ['heure', 'hre', 'h'];
+    juration.UNITS.minutes.patterns = ['minute', 'min', 'm'];
+    juration.UNITS.hours.patterns = ['heure', 'h'];
     juration.UNITS.days.patterns = ['jour', 'j'];
     juration.UNITS.weeks.patterns = ['semaine', 'sem', 'se'];
     juration.UNITS.months.patterns = ['mois'];
-    juration.UNITS.years.patterns = ['année', 'ann', 'an'];
+    juration.UNITS.years.patterns = ['année', 'an'];
 
     juration.UNITS.seconds.formats = {
       chrono: '',
@@ -32,7 +32,7 @@
     juration.UNITS.hours.formats = {
       chrono: ':',
       micro: 'h',
-      short: 'hre',
+      short: 'h',
       long: 'heure',
       plural: 'heures',
     };
@@ -60,7 +60,7 @@
     juration.UNITS.years.formats = {
       chrono: ':',
       micro: 'an',
-      short: 'ann',
+      short: 'an',
       long: 'année',
       plural: 'années',
     };
