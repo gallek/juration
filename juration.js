@@ -8,6 +8,15 @@
  */
 
 (function() {
+  var setEnglishUnits;
+  var setGermanUnits;
+  var setFrenchUnits;
+
+  if (typeof require !== 'undefined') {
+    var setEnglishUnits = require('./languages/en');
+    var setGermanUnits = require('./languages/de');
+    var setFrenchUnits = require('./languages/fr-FR');
+  }
 
   var UNITS = {
     milliseconds: {
@@ -209,10 +218,20 @@
     return obj;
   };
 
-  var setLanguage = function(language){
-    if (typeof require !== 'undefined'){
-      require('./languages/' + language);
-      return;
+  var _useLanguageFn = function (fn) {
+    if (typeof fn !== 'undefined') {
+      fn(UNITS);
+    }
+  };
+
+  var setLanguage = function (language) {
+    switch (language) {
+      case 'de':
+        return _useLanguageFn(setGermanUnits);
+      case 'fr-FR':
+        return _useLanguageFn(setFrenchUnits);
+      default:
+        return _useLanguageFn(setEnglishUnits);
     }
   };
 

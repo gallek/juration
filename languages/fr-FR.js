@@ -1,63 +1,56 @@
-(function () {
-  var juration;
-  if (typeof require !== 'undefined') {
-    juration = require('juration');
-  } else {
-    juration = window.juration;
-  }
+const setFrenchUnits = UNITS => {
+  if (UNITS) {
+    UNITS.seconds.patterns = ['seconde', 'sec', 's'];
+    UNITS.minutes.patterns = ['minute', 'min', 'm'];
+    UNITS.hours.patterns = ['heure', 'h'];
+    UNITS.days.patterns = ['jour', 'j'];
+    UNITS.weeks.patterns = ['semaine', 'sem', 'se'];
+    UNITS.months.patterns = ['mois'];
+    UNITS.years.patterns = ['année', 'an'];
 
-  if (juration && juration.UNITS) {
-    juration.UNITS.seconds.patterns = ['seconde', 'sec', 's'];
-    juration.UNITS.minutes.patterns = ['minute', 'min', 'm'];
-    juration.UNITS.hours.patterns = ['heure', 'h'];
-    juration.UNITS.days.patterns = ['jour', 'j'];
-    juration.UNITS.weeks.patterns = ['semaine', 'sem', 'se'];
-    juration.UNITS.months.patterns = ['mois'];
-    juration.UNITS.years.patterns = ['année', 'an'];
-
-    juration.UNITS.seconds.formats = {
+    UNITS.seconds.formats = {
       chrono: '',
       micro: 's',
       short: 'sec',
       long: 'seconde',
       plural: 'secondes',
     };
-    juration.UNITS.minutes.formats = {
+    UNITS.minutes.formats = {
       chrono: ':',
       micro: 'm',
       short: 'min',
       long: 'minute',
       plural: 'minutes',
     };
-    juration.UNITS.hours.formats = {
+    UNITS.hours.formats = {
       chrono: ':',
       micro: 'h',
       short: 'h',
       long: 'heure',
       plural: 'heures',
     };
-    juration.UNITS.days.formats = {
+    UNITS.days.formats = {
       chrono: ':',
       micro: 'j',
       short: 'j',
       long: 'jour',
       plural: 'jours',
     };
-    juration.UNITS.weeks.formats = {
+    UNITS.weeks.formats = {
       chrono: ':',
       micro: 'se',
       short: 'sem',
       long: 'semaine',
       plural: 'semaines',
     };
-    juration.UNITS.months.formats = {
+    UNITS.months.formats = {
       chrono: ':',
       micro: 'mois',
       short: 'mois',
       long: 'mois',
       plural: 'mois',
     };
-    juration.UNITS.years.formats = {
+    UNITS.years.formats = {
       chrono: ':',
       micro: 'an',
       short: 'an',
@@ -65,4 +58,6 @@
       plural: 'années',
     };
   }
-})();
+};
+
+module.exports = setFrenchUnits;
