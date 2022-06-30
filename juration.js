@@ -12,12 +12,14 @@
   var setGermanUnits;
   var setFrenchUnits;
   var setJapaneseUnits;
+  var setSpanishUnits;
 
   if (typeof require !== 'undefined') {
     var setEnglishUnits = require('./languages/en');
     var setGermanUnits = require('./languages/de');
     var setFrenchUnits = require('./languages/fr-FR');
     var setJapaneseUnits = require('./languages/ja-JP');
+    var setSpanishUnits = require('./languages/es-LA');
   }
 
   var UNITS = {
@@ -234,6 +236,8 @@
         return _useLanguageFn(setFrenchUnits);
       case 'ja-JP':
         return _useLanguageFn(setJapaneseUnits);
+        case 'es-LA':
+        return _useLanguageFn(setSpanishUnits);
       default:
         return _useLanguageFn(setEnglishUnits);
     }
