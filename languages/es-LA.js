@@ -4,7 +4,7 @@ const setSpanishUnits = UNITS => {
       UNITS.minutes.patterns = ['minuto', 'min'];
       UNITS.hours.patterns = ['hora', 'h'];
       UNITS.days.patterns = ['día', 'd'];
-      UNITS.weeks.patterns = ['semana', 'sem.'];
+      UNITS.weeks.patterns = ['semana', 'sem'];
       UNITS.months.patterns = ['mes'];
       UNITS.years.patterns = ['año'];
   
@@ -38,8 +38,8 @@ const setSpanishUnits = UNITS => {
       };
       UNITS.weeks.formats = {
         chrono: ':',
-        micro: 'sem.',
-        short: 'sem.',
+        micro: 'sem',
+        short: 'sem',
         long: 'semana',
         plural: 'semanas',
       };
